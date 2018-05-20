@@ -1,0 +1,12 @@
+{
+  "name": "teaching-js-to-sing",
+  "version": "0.0.1",
+  "description": "Source code for a talk on JS data types, using a worked web audio example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "python -m SimpleHTTPServer 8080"
+  },
+  "author": "@orangetronic",
+  "license": "ISC"
+}

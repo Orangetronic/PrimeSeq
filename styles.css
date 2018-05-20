@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+html, body {
+  font-size: 16px;
+  padding: 2rem;
+}
+
+.top-margin {
+  margin-top: 1rem;
+}
+.bottom-margin {
+  margin-bottom: 1rem;
+}
+.left-margin {
+  margin-left: 1rem;
+}
+.right-margin {
+  margin-right: 1rem;
+}
+
+.step-container {
+  float: left;
+}
+
+input {
+  display: block;
+  float: left; 
+  clear: both;
+  margin: 2px;
+}
+input.current {
+  background-color: orangered;
+}
+
