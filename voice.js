@@ -61,10 +61,9 @@ class Voice {
   play (freq = 440, d) {
 
     const duration = d || this.defaultDuration || 0.2
-    
-    const now = this.now()
+    const now  = this.now()
 
-    this.osc.frequency.setValueAtTime(freq, now)
+    this.osc.frequency.setValueAtTime(freq, now )
     this.gainNode.gain.setValueAtTime(0.85, now)
 
     this.filter.frequency.setValueCurveAtTime(this.filterEnvelope, now, duration)

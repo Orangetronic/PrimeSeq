@@ -1,29 +1,25 @@
-import Singer from './singer.js'
+import Singer   from './singer.js'
 import Sequence from './sequencer.js'
-
-console.log("hello")
 
 window.addEventListener('load', init)
 
 function init () {
   // let's get this party started
   setMessage("...initialising")
+
   const AudioContext = window.AudioContext || window.webkitAudioContext
   const context      = new AudioContext()
-  window.Singer      = new Singer(context)
+
   window.sequencers  = [
-    // new Sequence("stepsa", 2, window.Singer),
-    // new Sequence("stepsb", 3, window.Singer),
-    // new Sequence("stepsc", 5, window.Singer),
-    // new Sequence("stepsd", 7, window.Singer),
-    new Sequence("stepse", 11, window.Singer),
-    // new Sequence("stepsf", 13, window.Singer),
-    new Sequence("stepsg", 17, window.Singer),
+    new Sequence("stepsa", 2,  new Singer(context, { voiceCount: 12 })),
+    new Sequence("stepsb", 3,  new Singer(context, { voiceCount: 12 })),
+    new Sequence("stepsc", 5,  new Singer(context, { voiceCount: 12 })),
+    new Sequence("stepsd", 7,  new Singer(context, { voiceCount: 12 })),
+    new Sequence("stepse", 11, new Singer(context, { voiceCount: 12 })),
+    new Sequence("stepsf", 13, new Singer(context, { voiceCount: 12 })),
+    new Sequence("stepsg", 17, new Singer(context, { voiceCount: 12 })),
   ]
 
-  window.sequencers.forEach(seq => seq.randomise(1))
-  
-  
   document.getElementById("start").addEventListener("click", () => {
     window.sequence = window.setInterval(
       () => window.sequencers.forEach(seq => seq.playNext()),

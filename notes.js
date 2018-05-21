@@ -220,6 +220,19 @@ const noteNames = [
   "B8"
 ]
 
+window.noteNames = noteNames
+
 const quantize = freq => notes.find(note => note >= freq)
 
-export default quantize
+const note = index => {
+  const quantized = notes[index]
+  const noteName  = noteNames[index]
+  return {
+    freq : quantized,
+    name : noteName
+  }
+}
+
+export {
+  quantize, note
+}

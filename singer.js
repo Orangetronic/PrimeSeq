@@ -85,7 +85,6 @@ class Singer {
 
   play (freq = 440, d) {
     const duration = d || this.gateTime || 2
-    setMessage("playing voice " + this.nextVoice)
     const voice = this.voices[this.nextVoice]
     voice.play(freq, duration)
     this.nextVoice++
@@ -103,7 +102,13 @@ class Singer {
 }
 
 
-/* from https://stackoverflow.com/questions/22525934/connecting-convolvernode-to-an-oscillatornode-with-the-web-audio-the-simple-wa */
+/**
+ * Create an AudioBuffer filled with noise at a descending volume
+ * @param {Number} duration 
+ * @param {Number} decay 
+ * @param {Boolean} reverse 
+ * @param {AudioContext} audioContext 
+ */
 function impulseResponse( duration, decay, reverse, audioContext ) {
   var sampleRate = audioContext.sampleRate;
   var length     = sampleRate * duration;
@@ -119,11 +124,6 @@ function impulseResponse( duration, decay, reverse, audioContext ) {
     impulseR[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
   }
   return impulse;
-}
-
-function setMessage (message) {
-  const el = document.getElementById("message")
-  el.innerHTML = message
 }
 
 export default Singer
