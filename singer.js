@@ -2,6 +2,16 @@ import Voice from './voice.js'
 import waveTypes from "./wavetypes.js"
 
 class Singer {
+
+  static defaults () {
+    return {
+      volume: 0.15,
+      cutoff: 1,
+      gateTime: 0.75,
+
+    }
+  }
+
   /**
    * Every song needs a singer
    * @param {AudioContext} context the audio context

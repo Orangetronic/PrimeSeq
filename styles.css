@@ -6,8 +6,16 @@
 }
 
 html, body {
+  min-height: 100vh;
   font-size: 16px;
   padding: 2rem;
+}
+
+body {
+  background-size: 45vw;
+  background-image: url(optimus.svg);
+  background-repeat: no-repeat;
+  background-position: right bottom;
 }
 
 .top-margin {

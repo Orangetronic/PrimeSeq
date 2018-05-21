@@ -65,9 +65,7 @@ function init() {
   setMessage("Initialised!")
   try {
   } catch (e) {
-    setMessage(
-      "There was an error initialising the app:<br />" + JSON.stringify(e)
-    )
+    setMessage("There was an error initialising the app:<br />" + JSON.stringify(e))
   }
 }
 
