@@ -9,11 +9,11 @@ class Controls {
     this.container.appendChild(this.name)
 
     this.controls = [
-      new Slider("Volume",    0.3, 0,    0.45, 0.01, val => synth.volume(val)),
-      new Slider("Cutoff",    1,   0.02, 15,   0.01, val => synth.cutoff(val)),
-      new Slider("Resonance", 1,   0.1,  37,   0.1 , val => synth.resonance(val)),
-      new Slider("Gate",      2,   0.01, 3,    0.01, val => synth.setGateTime(val)),
-      new Slider("Effects",   0,   0,    1,    0.05, val => synth.wetness(val)),
+      new Slider("Volume",    0.3,  0,    0.45, 0.01, val => synth.volume(val)),
+      new Slider("Cutoff",    1,    0.02, 15,   0.01, val => synth.cutoff(val)),
+      new Slider("Resonance", 1,    0.1,  37,   0.1 , val => synth.resonance(val)),
+      new Slider("Gate",      0.75, 0.01, 3,    0.01, val => synth.setGateTime(val)),
+      new Slider("Effects",   0,    0,    1,    0.05, val => synth.wetness(val)),
       new Select("Wave", waveTypes, waveTypes.sine, (type) => synth.setType(type))
     ]
 

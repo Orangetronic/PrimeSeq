@@ -1,6 +1,7 @@
 import { noteNames } from "./notes.js"
 
 class Key {
+
   constructor (name) {
     this.name = name
     this.container = document.createElement("div")

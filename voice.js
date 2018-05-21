@@ -1,13 +1,10 @@
 import waveTypes from "./wavetypes.js"
 
-const baseEnvelope = [5000,2500,1250,750,440,220,110,55,25,0]
+const baseEnvelope = [20,100, 200,5000,4000,3000,2500,1250,750,440,220,110,55,25,0]
 
 const envelope = filterVal => new Float32Array(baseEnvelope.map(i => i * filterVal))
 
-
 class Voice {
-
-  
 
   /**
    * Every song needs a singer
@@ -60,19 +57,19 @@ class Voice {
   now () { return this.context.currentTime }
 
   setDuration (d) {
-    this.defaultDuration = d
+    this.defaultDuration = Number(d)
   }
 
   play (freq = 440, d) {
 
-    const duration = d || this.defaultDuration || 0.2
+    const duration = Number(d || this.defaultDuration || 0.2)
     const now  = this.now()
 
     this.osc.frequency.setValueAtTime(freq, now )
-    this.gainNode.gain.exponentialRampToValueAtTime(0.85, now + 0.1)
+    this.gainNode.gain.exponentialRampToValueAtTime(0.85, Number(now + 0.2))
 
     this.filter.frequency.setValueCurveAtTime(this.filterEnvelope, now, duration)
-    this.gainNode.gain.exponentialRampToValueAtTime(0.001, now + (duration * 2))
+    this.gainNode.gain.exponentialRampToValueAtTime(0.001, Number(now + duration))
 
   }
 

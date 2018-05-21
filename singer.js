@@ -16,7 +16,6 @@ class Singer {
       this.in         = this.context.createChannelSplitter(2)
       this.delay      = this.context.createDelay()
       this.reverb     = this.context.createConvolver()
-      this.compressor = this.context.createDynamicsCompressor()
       this.dry        = this.context.createGain()
       this.wet        = this.context.createGain()
       this.out        = this.context.createGain()
@@ -29,13 +28,9 @@ class Singer {
       this.in.connect(this.dry, 1)
       this.delay.connect(this.reverb)
       this.reverb.connect(this.wet)
-      
-
       this.wet.connect(this.out)
       this.dry.connect(this.out)
-
-      this.out.connect(this.compressor)
-      this.compressor.connect(this.context.destination)
+      this.out.connect(this.context.destination)
 
       const now = this.context.currentTime
 
@@ -53,9 +48,11 @@ class Singer {
         })
         this.voices.push(voice)
       }
+
       this.nextVoice = 0
-      this.volume(0.2)
+      this.volume(0.1)
       this.wetness(0)
+      this.gateTime = 0.75
     } catch (e) {
       console.error(e)
     }
@@ -65,7 +62,7 @@ class Singer {
     this.voices.forEach(voice => voice.setType(type))
   }
 
-  volume (vol = 0.75) {
+  volume (vol = 0.1) {
     const now = this.now()
     this.out.gain.exponentialRampToValueAtTime(vol, now + 0.3)
   }
