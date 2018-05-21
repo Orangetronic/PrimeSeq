@@ -1,4 +1,5 @@
 import Voice from './voice.js'
+import waveTypes from "./wavetypes.js"
 
 class Singer {
   /**
@@ -47,7 +48,8 @@ class Singer {
       const voiceCount = options.voiceCount || 128
       while (this.voices.length < voiceCount) {
         const voice = new Voice(this.context, {
-          out: this.in
+          out: this.in,
+          type: waveTypes.sine
         })
         this.voices.push(voice)
       }
@@ -57,6 +59,10 @@ class Singer {
     } catch (e) {
       console.error(e)
     }
+  }
+
+  setType (type="saw") {
+    this.voices.forEach(voice => voice.setType(type))
   }
 
   volume (vol = 0.75) {

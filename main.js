@@ -24,6 +24,7 @@ function init() {
     const controlZone     = document.getElementById("settings")
     controlZone.innerHTML = ""
     const controls = synthControllers.get(seq)
+    if (!controls) return // this voice has no controls
     controlZone.appendChild(controls.container)
   }
 
@@ -31,9 +32,7 @@ function init() {
   window.sequencers.forEach((sequencer, index) => {
     const controller = new Controls(sequencer.voice, "Sequence " + (index + 1))
     synthControllers.set(sequencer, controller)
-    sequencer.container.addEventListener("click", () => {
-      showControlsForSequencer(sequencer)
-    })
+    sequencer.container.addEventListener("click", () => showControlsForSequencer(sequencer))
     sequencerContainer.appendChild(sequencer.container)
   })
 

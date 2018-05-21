@@ -1,4 +1,6 @@
-const baseEnvelope = [50,500,5000,2500,1250,750,440,220,110,55,25,0]
+import waveTypes from "./wavetypes.js"
+
+const baseEnvelope = [5000,2500,1250,750,440,220,110,55,25,0]
 
 const envelope = filterVal => new Float32Array(baseEnvelope.map(i => i * filterVal))
 
@@ -29,7 +31,7 @@ class Voice {
     
     this.setCuttoff()
     
-    this.osc.type       = type || "saw"
+    this.osc.type       = type || waveTypes.sine
 
     this.osc.connect(this.gainNode)
     this.gainNode.connect(this.filter)
@@ -41,10 +43,13 @@ class Voice {
     this.osc.start(now)
   }
 
+  setType (type = waveTypes.sine) {
+    this.osc.type = type
+  }
+
   setCuttoff (cutoff = 1) {
     const now = this.now()
     this.filterEnvelope = envelope(cutoff)
-    this.filter.Q.setValueAtTime(5, now )
   }
 
   setRes ( res = 5 ) {
@@ -64,7 +69,7 @@ class Voice {
     const now  = this.now()
 
     this.osc.frequency.setValueAtTime(freq, now )
-    this.gainNode.gain.setValueAtTime(0.85, now)
+    this.gainNode.gain.exponentialRampToValueAtTime(0.85, now + 0.1)
 
     this.filter.frequency.setValueCurveAtTime(this.filterEnvelope, now, duration)
     this.gainNode.gain.exponentialRampToValueAtTime(0.001, now + (duration * 2))
