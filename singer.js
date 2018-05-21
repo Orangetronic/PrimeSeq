@@ -1,4 +1,4 @@
-import Voice from './voice.js'
+import Voice     from './voice.js'
 import waveTypes from "./wavetypes.js"
 
 class Singer {
