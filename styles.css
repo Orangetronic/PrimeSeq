@@ -49,7 +49,7 @@ html, body {
 }
 
 .step.current::after {
-  background: salmon;
+  background: orangeRed;
   border-radius: 100%;
   content: " ";
   display: block;
