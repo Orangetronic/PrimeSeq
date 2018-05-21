@@ -53,32 +53,37 @@ class Singer {
 
       this.delay.delayTime.setValueAtTime(40, now)
 
-      this.voices = []
-      const voiceCount = options.voiceCount || 128
-      while (this.voices.length < voiceCount) {
-        const voice = new Voice(this.context, {
-          out: this.in,
-          type: waveTypes.sine
-        })
-        this.voices.push(voice)
-      }
-
-      this.nextVoice = 0
-
-      // set defaults
+      // defaults
       const {
         volume,
         cutoff,
         resonance,
         gateTime,
+        waveType,
         wetness
       } = Singer.defaults()
 
+      // setup the oscillators
+      this.voices = []
+      const voiceCount = options.voiceCount || 128
+      while (this.voices.length < voiceCount) {
+        const voice = new Voice(this.context, {
+          out  : this.in,
+          type : waveType
+        })
+        this.voices.push(voice)
+      }
+
+      // set the next voice to be used
+      this.nextVoice = 0
+
+      // apply defaults
       this.volume(volume)
       this.wetness(wetness)
       this.gateTime = gateTime
       this.cutoff(cutoff)
       this.resonance(resonance)
+
     } catch (e) {
       console.error(e)
     }

@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Courier New', Courier, monospace;
+  font-weight: 100;
 }
 
 html, body {
@@ -29,6 +30,10 @@ body {
 }
 .right-margin {
   margin-right: 1rem;
+}
+
+input:focus {
+  outline: deeppink 1px solid;
 }
 
 #settings {
