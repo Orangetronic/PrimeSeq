@@ -1,4 +1,6 @@
 import waveTypes from "./wavetypes.js"
+import Singer    from "./singer.js"
+
 class Controls {
   constructor (synth, name) {
     this.container = document.createElement("div")
@@ -8,13 +10,22 @@ class Controls {
     this.name.innerText = name
     this.container.appendChild(this.name)
 
+    const {
+      volume,
+      cutoff,
+      resonance,
+      gateTime,
+      wetness,
+      waveType
+    } = Singer.defaults()
+
     this.controls = [
-      new Slider("Volume",    0.3,  0,    0.45, 0.01, val => synth.volume(val)),
-      new Slider("Cutoff",    1,    0.02, 15,   0.01, val => synth.cutoff(val)),
-      new Slider("Resonance", 1,    0.1,  37,   0.1 , val => synth.resonance(val)),
-      new Slider("Gate",      0.75, 0.01, 3,    0.01, val => synth.setGateTime(val)),
-      new Slider("Effects",   0,    0,    1,    0.05, val => synth.wetness(val)),
-      new Select("Wave", waveTypes, waveTypes.sine, (type) => synth.setType(type))
+      new Slider("Volume",    volume,    0,     0.45,  0.01,  val => synth.volume(val)),
+      new Slider("Cutoff",    cutoff,    0.02,  15,    0.01,  val => synth.cutoff(val)),
+      new Slider("Resonance", resonance, 0.1,   37,    0.1 ,  val => synth.resonance(val)),
+      new Slider("Gate",      gateTime,  0.01,  3,     0.01,  val => synth.setGateTime(val)),
+      new Slider("Effects",   wetness,   0,     1,     0.05,  val => synth.wetness(val)),
+      new Select("Wave",      waveType,  waveTypes,           type => synth.setType(type))
     ]
 
     this.controls.forEach(control => this.container.appendChild(control.container))
@@ -52,7 +63,7 @@ class Slider {
 }
 
 class Select {
-  constructor (label, options, value, callback) {
+  constructor (label, value, options, callback) {
     const id = label
     this.container       = document.createElement("div")
     this.label           = document.createElement("label")

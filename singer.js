@@ -5,17 +5,19 @@ class Singer {
 
   static defaults () {
     return {
-      volume: 0.15,
-      cutoff: 1,
-      gateTime: 0.75,
-
+      volume    : 0.15,
+      cutoff    : 0.5,
+      resonance : 0.8,
+      gateTime  : 0.75,
+      wetness   : 0,
+      waveType  : waveTypes.sine
     }
   }
 
   /**
    * Every song needs a singer
    * @param {AudioContext} context the audio context
-   * @param {Object} options 
+   * @param {Object} options
    * @param {Number} options.voiceCount the number of voices the singer has
    */
   constructor (context, options = {}) {
@@ -23,6 +25,7 @@ class Singer {
 
     try {
 
+      // audio nodes
       this.in         = this.context.createChannelSplitter(2)
       this.delay      = this.context.createDelay()
       this.reverb     = this.context.createConvolver()
@@ -32,6 +35,7 @@ class Singer {
 
       this.reverb.buffer = impulseResponse(4, 4, false, this.context)
 
+      // node mappings
       this.in.connect(this.delay, 0)
       this.in.connect(this.delay, 1)
       this.in.connect(this.dry, 0)
@@ -48,7 +52,7 @@ class Singer {
       this.dry.gain.setValueAtTime(0.5, now)
 
       this.delay.delayTime.setValueAtTime(40, now)
-  
+
       this.voices = []
       const voiceCount = options.voiceCount || 128
       while (this.voices.length < voiceCount) {
@@ -60,9 +64,21 @@ class Singer {
       }
 
       this.nextVoice = 0
-      this.volume(0.1)
-      this.wetness(0)
-      this.gateTime = 0.75
+
+      // set defaults
+      const {
+        volume,
+        cutoff,
+        resonance,
+        gateTime,
+        wetness
+      } = Singer.defaults()
+
+      this.volume(volume)
+      this.wetness(wetness)
+      this.gateTime = gateTime
+      this.cutoff(cutoff)
+      this.resonance(resonance)
     } catch (e) {
       console.error(e)
     }
@@ -117,10 +133,10 @@ class Singer {
 
 /**
  * Create an AudioBuffer filled with noise at a descending volume
- * @param {Number} duration 
- * @param {Number} decay 
- * @param {Boolean} reverse 
- * @param {AudioContext} audioContext 
+ * @param {Number} duration
+ * @param {Number} decay
+ * @param {Boolean} reverse
+ * @param {AudioContext} audioContext
  */
 function impulseResponse( duration, decay, reverse, audioContext ) {
   var sampleRate = audioContext.sampleRate;
