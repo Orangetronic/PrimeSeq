@@ -1,9 +1,10 @@
 import Step from "./step.js"
 class Sequence {
 
-  constructor (containerId, stepCount, singer) {
+  constructor (stepCount, singer) {
     this.voice = singer
-    this.container = document.getElementById(containerId)
+    this.container = document.createElement("div")
+    this.container.classList.add("step-container")
     this.steps = []
     while (this.steps.length < stepCount) {
       const step = new Step(29, 77)
@@ -12,6 +13,10 @@ class Sequence {
     }
     this.currentStep  = 0
     this.previousStep = null
+  }
+
+  noteNames () {
+    return this.steps.map(step => step.noteName())
   }
 
   randomise (probability = 0.5) {
@@ -28,8 +33,11 @@ class Sequence {
 
     const step = this.steps[this.currentStep]
 
+    let noteName = null
+
     if (step.isActive()) {
       const note = step.value()
+      noteName = step.noteName()
       this.voice.play(note)
     }
 
@@ -38,6 +46,8 @@ class Sequence {
 
     this.currentStep++
     if (this.currentStep == this.steps.length) this.currentStep = 0
+
+    return noteName
   }
 
 }

@@ -23,25 +23,67 @@ html, body {
   margin-right: 1rem;
 }
 
+#settings {
+  float: right;
+  text-align: right;
+  line-height: 1rem;
+}
+#settings h2 { margin-bottom: 1rem; }
+
+#settings label { 
+  display: inline-block;  
+  margin-right: 1rem;
+  font-size: 0.6rem;
+  line-height: 0.6rem;
+}
+
+
 .step-container {
   float: left;
 }
 
 .step {
-  width: 250px;
   clear: both;
   display: flex;
+  width: 250px;
 }
 
 .step.current::after {
-  margin-left: 1rem;
   background: salmon;
   border-radius: 100%;
   content: " ";
   display: block;
   height: 1rem;
+  margin-left: 1rem;
   width: 1rem;
 }
 
+.keyboard {
+  height: 34px;
+  margin-top: 1rem;
+}
 
+.keyboard .key {
+  float: left;
+  font-size: 8px;
+  height: 42px;
+  outline: 1px solid black;
+  width: 16px;
+  z-index: 0;
+}
+.keyboard .sharp {
+  background: black;
+  color: white;
+  float: left;
+  height: 27px;
+  margin-left: -8px;
+  margin-right: -8px;
+  outline-color: white;
+  transform: translateZ(10px);
+  z-index: 1;
+}
+
+.keyboard .active {
+  background: orangered;
+}
 

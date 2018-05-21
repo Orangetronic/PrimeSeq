@@ -234,5 +234,5 @@ const note = index => {
 }
 
 export {
-  quantize, note
+  quantize, note, noteNames
 }

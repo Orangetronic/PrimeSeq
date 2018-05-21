@@ -37,6 +37,10 @@ class Step {
     this.container.classList.remove(c)
   }
 
+  noteName () {
+    return this.note.name || null
+  }
+
   noteFromVal (v) {
     const val = v != null ? v : this.slider.value
     this.note = note(Number(val))

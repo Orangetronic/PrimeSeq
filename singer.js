@@ -52,7 +52,7 @@ class Singer {
         this.voices.push(voice)
       }
       this.nextVoice = 0
-      this.volume(0.3)
+      this.volume(0.2)
       this.wetness(0)
     } catch (e) {
       console.error(e)
