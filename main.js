@@ -52,14 +52,17 @@ function init() {
     const newMessage = "playing " + Array.from(uniquePlaying).join(", ")
     keyboard.play(uniquePlaying)
     setMessage(newMessage)
+    if (!window.stopped) window.setTimeout(playNextStep, window.tempo || 160)
   }
 
   document.getElementById("start").addEventListener("click", () => {
-    window.sequence = window.setInterval(playNextStep, 350)
+    window.stopped = false
+    window.setTimeout(playNextStep, window.tempo || 160)
   })
 
   document.getElementById("stop").addEventListener("click", () => {
-    window.clearInterval(window.sequence)
+    window.stopped = true
+    // window.clearInterval(window.sequence)
   })
 
   setMessage("Initialised!")

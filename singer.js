@@ -1,6 +1,8 @@
 import Voice     from './voice.js'
 import waveTypes from "./wavetypes.js"
 
+
+
 class Singer {
 
   static defaults () {
@@ -10,7 +12,8 @@ class Singer {
       resonance : 0.8,
       gateTime  : 0.75,
       wetness   : 0,
-      waveType  : waveTypes.sine
+      waveType  : waveTypes.sine,
+      tempo     : 110
     }
   }
 

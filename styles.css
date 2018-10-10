@@ -100,3 +100,10 @@ input:focus {
   background: orangered;
 }
 
+.controls {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  background: RGBA(255,255,255,0.75);
+  padding: 1rem;
+}

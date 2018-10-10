@@ -1,6 +1,10 @@
 import waveTypes from "./wavetypes.js"
 import Singer    from "./singer.js"
 
+
+const BPMTOMS = bpm => (60 / bpm) * 1000
+
+
 class Controls {
   constructor (synth, name) {
     this.container = document.createElement("div")
@@ -16,16 +20,18 @@ class Controls {
       resonance,
       gateTime,
       wetness,
-      waveType
+      waveType,
+      tempo
     } = Singer.defaults()
 
     this.controls = [
+      new Slider("BPM",       tempo,     40,    440,   0.5,   val => window.tempo = BPMTOMS(val)),
       new Slider("Volume",    volume,    0,     0.45,  0.01,  val => synth.volume(val)),
       new Slider("Cutoff",    cutoff,    0.02,  15,    0.01,  val => synth.cutoff(val)),
       new Slider("Resonance", resonance, 0.1,   37,    0.1 ,  val => synth.resonance(val)),
       new Slider("Gate",      gateTime,  0.01,  3,     0.01,  val => synth.setGateTime(val)),
       new Slider("Effects",   wetness,   0,     1,     0.05,  val => synth.wetness(val)),
-      new Select("Wave",      waveType,  waveTypes,           type => synth.setType(type))
+      new Select("Wave",      waveType,  waveTypes,           type => synth.setType(type)),
     ]
 
     this.controls.forEach(control => this.container.appendChild(control.container))
