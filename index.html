@@ -4,13 +4,16 @@
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <title>Teaching JavaScript to Sing</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="main.js" type="module"></script>
 </head>
 <body>
   <div id="settings"></div>
   <header>
     <h1>PrimeSeq</h1>
-    <button id="start">|> Play</button><button id="stop">[] Stop</button>
+
+    <button id="init">Power On</button>
+    <button disabled id="start">|> Play</button>
+    <button disabled id="stop">[] Stop</button>
+    
     <div id="keyboard"></div>
     <div class="top-margin" id="message"></div>
   </header>
@@ -22,5 +25,6 @@
   <main>
     <div id="sequencers"></div>
   </main>
+  <script src="main.js" type="module"></script>
 </body>
 </html>

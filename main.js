@@ -3,9 +3,15 @@ import Sequence from "./sequencer.js"
 import Keyboard from "./keyboard.js"
 import Controls from "./controls.js"
 
-window.addEventListener("load", init)
-
+// the first handful of prime numbers
 const stepLengths = [2, 3, 5, 7, 11, 13, 17]
+
+let initialised = false
+
+
+document.getElementById("init").addEventListener("click", () => {
+  init()
+})
 
 function init() {
   // let's get this party started
@@ -55,15 +61,24 @@ function init() {
     if (!window.stopped) window.setTimeout(playNextStep, window.tempo || 160)
   }
 
-  document.getElementById("start").addEventListener("click", () => {
+  const startButton = document.getElementById("start")
+  const stopButton  = document.getElementById("stop")
+
+  startButton.disabled = false
+  stopButton.disabled = false
+
+  startButton.addEventListener("click", () => {
     window.stopped = false
     window.setTimeout(playNextStep, window.tempo || 160)
   })
 
-  document.getElementById("stop").addEventListener("click", () => {
+  stopButton.addEventListener("click", () => {
     window.stopped = true
     // window.clearInterval(window.sequence)
   })
+
+  const initButton = document.getElementById("init")
+  initButton.disabled = true
 
   setMessage("Initialised!")
   try {
